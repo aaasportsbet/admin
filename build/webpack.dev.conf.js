@@ -19,10 +19,7 @@ const PORT = process.env.PORT && Number(process.env.PORT)
 const devWebpackConfig = merge(baseWebpackConfig, {
   mode: 'development',
   module: {
-    rules: utils.styleLoaders({
-      sourceMap: config.dev.cssSourceMap,
-      usePostCSS: true
-    })
+    rules: utils.styleLoaders({sourceMap: config.dev.cssSourceMap, usePostCSS: true})
   },
   // cheap-module-eval-source-map is faster for development
   devtool: config.dev.devtool,
@@ -37,7 +34,10 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     port: PORT || config.dev.port,
     open: config.dev.autoOpenBrowser,
     overlay: config.dev.errorOverlay
-      ? { warnings: false, errors: true }
+      ? {
+        warnings: false,
+        errors: true
+      }
       : false,
     publicPath: config.dev.assetsPublicPath,
     proxy: config.dev.proxyTable,
@@ -47,9 +47,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     }
   },
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env': require('../config/dev.env')
-    }),
+    new webpack.DefinePlugin({'process.env': require('../config/dev.env')}),
     new webpack.HotModuleReplacementPlugin(),
     // https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
@@ -57,11 +55,11 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       template: 'index.html',
       inject: true,
       favicon: resolve('favicon.ico'),
-      title: 'vue-element-admin',
+      title: 'aaasportsbet-admin',
       templateParameters: {
-        BASE_URL: config.dev.assetsPublicPath + config.dev.assetsSubDirectory,
-      },
-    }),
+        BASE_URL: config.dev.assetsPublicPath + config.dev.assetsSubDirectory
+      }
+    })
   ]
 })
 
@@ -77,20 +75,16 @@ module.exports = new Promise((resolve, reject) => {
       devWebpackConfig.devServer.port = port
 
       // Add FriendlyErrorsPlugin
-      devWebpackConfig.plugins.push(
-        new FriendlyErrorsPlugin({
+      devWebpackConfig
+        .plugins
+        .push(new FriendlyErrorsPlugin({
           compilationSuccessInfo: {
-            messages: [
-              `Your application is running here: http://${
-                devWebpackConfig.devServer.host
-              }:${port}`
-            ]
+            messages: [`Your application is running here: http://${devWebpackConfig.devServer.host}:${port}`]
           },
           onErrors: config.dev.notifyOnErrors
             ? utils.createNotifierCallback()
             : undefined
-        })
-      )
+        }))
 
       resolve(devWebpackConfig)
     }
