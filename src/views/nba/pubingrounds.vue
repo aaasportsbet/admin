@@ -1,6 +1,14 @@
 <template>
   <div class="app-container">
-    <div class="filter-container"></div>
+    <div class="filter-container">
+      <el-button
+        class="filter-item"
+        style="margin-left: 10px;"
+        type="success"
+        icon="el-icon-refresh"
+        @click="getList()"
+      >刷新</el-button>
+    </div>
 
     <el-table
       v-loading="listLoading"
@@ -74,12 +82,8 @@
       </el-table-column>
       <el-table-column label="操作" align="center" width="230" class-name="small-padding fixed-width">
         <template slot-scope="scope">
-          <el-button type="primary" v-if="canLottery(scope.row)" @click="lotteryRound(scope.row)">开奖</el-button>
-          <el-button
-            type="success"
-            v-else-if="canWithdraw(scope.row)"
-            @click="withdrawRound(scope.row)"
-          >手续费</el-button>
+          <el-button type="primary" @click="lotteryRound(scope.row)">开奖</el-button>
+          <el-button type="success" @click="withdrawRound(scope.row)">手续费</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -231,27 +235,6 @@ export default {
         this.listQuery.sort = "-id";
       }
       this.handleFilter();
-    },
-    canLottery(round) {
-      const now = moment().unix();
-      if (
-        now >
-          round.bet_end_time +
-            this.config.game_duration +
-            this.config.public_duration &&
-        (round.award_left > 0 && round.return_left > 0)
-      ) {
-        return true;
-      }
-
-      return false;
-    },
-    canWithdraw(round) {
-      if (round.award_left === 0 || round.return_left === 0) {
-        return true;
-      }
-
-      return false;
     },
     lotteryRound(round) {
       lotteryRound(round).then(result => {

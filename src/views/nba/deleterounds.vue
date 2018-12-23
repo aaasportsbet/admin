@@ -1,6 +1,14 @@
 <template>
   <div class="app-container">
-    <div class="filter-container"></div>
+    <div class="filter-container">
+      <el-button
+        class="filter-item"
+        style="margin-left: 10px;"
+        type="success"
+        icon="el-icon-refresh"
+        @click="getList()"
+      >刷新</el-button>
+    </div>
 
     <el-table
       v-loading="listLoading"

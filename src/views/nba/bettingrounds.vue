@@ -8,6 +8,13 @@
         icon="el-icon-edit"
         @click="handleCreateRound"
       >创建赛局</el-button>
+      <el-button
+        class="filter-item"
+        style="margin-left: 10px;"
+        type="success"
+        icon="el-icon-refresh"
+        @click="getList()"
+      >刷新</el-button>
     </div>
 
     <el-table
