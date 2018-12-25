@@ -50,14 +50,14 @@
           <span>{{ scope.row.bet_unit }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="手续费" align="center">
+      <el-table-column label="单笔手续费" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.fee_unit }}</span>
         </template>
       </el-table-column>
       <el-table-column label="奖池" align="center">
         <template slot-scope="scope">
-          <span>{{ scope.row.total }}</span>
+          <span>{{ scope.row.total }} / {{ scope.row.token_left }}</span>
         </template>
       </el-table-column>
       <el-table-column label="投注次数" align="center">

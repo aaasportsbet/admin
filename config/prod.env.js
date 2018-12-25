@@ -4,12 +4,12 @@ module.exports = {
   BASE_API: '"https://api-prod"',
   EOS: {
     DEBUG: '"true"',
-    PROTOCOL: '"https"',
-    HOST: '"api-kylin.eosasia.one"',
-    PORT: '443',
+    PROTOCOL: '"http"',
+    HOST: '"api-mainnet.starteos.io"',
+    PORT: '80',
     CHAINID:
-        '"5fff1dae8dc8e2fc4d5b23b2c7665c97f9e9d8edf2b6485a86ba311c25639191"',
-    CONTRACTNBA: '"aaasports114"',
+        '"aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906"',
+    CONTRACTNBA: '"aaasportsnba"',
     APPLICATION: '"aaasportsbetadmin"'
   }
 }
