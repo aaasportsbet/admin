@@ -45,6 +45,11 @@
           <span>{{ scope.row.bet_end_time | parseTime }}</span>
         </template>
       </el-table-column>
+      <el-table-column label="比赛结束时间" align="center">
+        <template slot-scope="scope">
+          <span>{{ (scope.row.bet_end_time + 10800) | parseTime }}</span>
+        </template>
+      </el-table-column>
       <el-table-column label="单笔投注金额" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.bet_unit }}</span>
@@ -81,7 +86,7 @@
         </template>
       </el-table-column>
       <el-table-column label="操作" align="center" width="230" class-name="small-padding fixed-width">
-        <template slot-scope="scope">
+        <template slot-scope="scope" v-if="canPublic(scope.row)">
           <el-button type="primary" @click="handlePublish(scope.row)">公布比分</el-button>
         </template>
       </el-table-column>
@@ -120,6 +125,7 @@
 
 <script>
 import * as moment from "moment";
+import { getconfig } from "@/scatter/config";
 import { publishRound, getRoundListByStatus } from "@/scatter/nba/round";
 import waves from "@/directive/waves"; // Waves directive
 import Pagination from "@/components/Pagination"; // Secondary package based on el-pagination
@@ -195,6 +201,8 @@ export default {
       list: null,
       total: 0,
       listLoading: true,
+      config: {},
+      contract: process.env.EOS.CONTRACTNBA,
       listQuery: {
         page: 1,
         limit: 20,
@@ -237,6 +245,9 @@ export default {
   },
   created() {
     this.getList();
+    getconfig(this.contract).then(config => {
+      this.config = config;
+    });
   },
   methods: {
     getList() {
@@ -275,6 +286,14 @@ export default {
         away: round.awayteam,
         awaypoint: 0
       };
+    },
+    canPublic(round) {
+      const now = moment().unix();
+      if (now > round.bet_end_time + 10800) {
+        return true;
+      }
+
+      return false;
     },
     handlePublish(round) {
       this.resetTemp(round);

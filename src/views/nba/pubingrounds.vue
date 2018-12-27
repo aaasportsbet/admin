@@ -81,7 +81,7 @@
         </template>
       </el-table-column>
       <el-table-column label="操作" align="center" width="230" class-name="small-padding fixed-width">
-        <template slot-scope="scope">
+        <template slot-scope="scope" v-if>
           <el-button type="primary" @click="lotteryRound(scope.row)">开奖</el-button>
           <el-button type="success" @click="withdrawRound(scope.row)">手续费</el-button>
         </template>
