@@ -1,8 +1,7 @@
 # build stage
-FROM node:11 as build-stage
+FROM node:10.15.0-jessie as build-stage
 WORKDIR /app
 COPY package*.json ./
-#RUN npm cache clean -f && npm install -g n && n stable
 RUN npm install
 COPY . .
 RUN npm run build:prod
