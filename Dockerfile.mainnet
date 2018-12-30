@@ -1,5 +1,5 @@
 # build stage
-FROM node as build-stage
+FROM node:11 as build-stage
 WORKDIR /app
 COPY package*.json ./
 #RUN npm cache clean -f && npm install -g n && n stable
