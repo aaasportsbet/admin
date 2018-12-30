@@ -86,8 +86,18 @@
         </template>
       </el-table-column>
       <el-table-column label="操作" align="center" width="230" class-name="small-padding fixed-width">
-        <template slot-scope="scope" v-if="canPublic(scope.row)">
-          <el-button type="primary" @click="handlePublish(scope.row)">公布比分</el-button>
+        <template slot-scope="scope">
+          <el-button
+            type="primary"
+            v-if="canPublic(scope.row)"
+            @click="handlePublish(scope.row)"
+          >公布比分</el-button>
+          <el-button
+            type="primary"
+            v-if="!canPublic(scope.row)"
+            @click="handlePublish(scope.row)"
+            disabled
+          >公布比分</el-button>
         </template>
       </el-table-column>
     </el-table>
