@@ -2,7 +2,7 @@
 FROM node:11-alpine as build-stage
 WORKDIR /app
 COPY package*.json ./
-RUN npm cache clean -f & npm install -g n & n stable
+RUN npm cache clean -f && npm install -g n && n stable
 RUN npm install
 COPY . .
 RUN npm run build:prod
