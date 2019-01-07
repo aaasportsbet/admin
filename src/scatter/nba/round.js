@@ -65,7 +65,7 @@ function nullObj(obj) {
   }
 
 export async function createRound(round) {
-  logout();  // using contract permission
+  await logout();  // using contract permission
   const scatter = await getScatterEOS();
   if (scatter != null && scatter.identity) {
     const account = scatter.identity.accounts.find(x => x.blockchain === 'eos');
@@ -80,7 +80,7 @@ export async function createRound(round) {
   }
 
 export async function publishRound(round) {
-  logout();  // using contract permission
+  await logout();  // using contract permission
   console.log(round);
   const scatter = await getScatterEOS();
   if (scatter != null && scatter.identity) {
@@ -95,7 +95,7 @@ export async function publishRound(round) {
   }
 
 export async function lotteryRound(round) {
-  logout();  // using contract permission
+  await logout();  // using contract permission
   const scatter = await getScatterEOS(true);
   if (scatter != null && scatter.identity) {
     const account = scatter.identity.accounts.find(x => x.blockchain === 'eos');
@@ -108,7 +108,7 @@ export async function lotteryRound(round) {
   }
 
 export async function deleteRound(round) {
-  logout();  // using contract permission
+  await logout();  // using contract permission
   const scatter = await getScatterEOS(true);
   if (scatter != null && scatter.identity) {
     const account = scatter.identity.accounts.find(x => x.blockchain === 'eos');
@@ -122,7 +122,7 @@ export async function deleteRound(round) {
   }
 
 export async function withdrawRound(round) {
-  logout();  // using contract permission
+  await logout();  // using contract permission
   const scatter = await getScatterEOS(true);
   if (scatter != null && scatter.identity) {
     const account = scatter.identity.accounts.find(x => x.blockchain === 'eos');
